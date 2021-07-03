@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,6 +59,7 @@ const Games = () => {
     return () => {
       document.removeEventListener('scroll', loadMore);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [games]);
 
   if (error) {

@@ -72,6 +72,7 @@ const SortFields = () => {
 
   useEffect(() => {
     dispatch(fetchGames(1, platform, sortDirection + sortField, searchField));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [platform, sortField, sortDirection, searchField]);
 
   return (

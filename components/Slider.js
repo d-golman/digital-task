@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 
@@ -67,10 +68,10 @@ const Slider = ({ images }) => {
   return (
     <SliderBlock >
       <div style={{ right: '0px' }} ref={ref} className="images">
-        {images.map((screenshot, index) => {
+        {images.map(screenshot => {
           return (
-            <div key={index} className="image">
-              <img key={screenshot.id} src={screenshot.image} />
+            <div key={screenshot.id} className="image">
+              <img key={screenshot.id} alt={screenshot.id} src={screenshot.image} />
             </div>
           );
         })

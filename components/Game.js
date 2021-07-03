@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import styled from 'styled-components';
 import Slider from './Slider';
@@ -51,7 +52,7 @@ const Game = ({ game, error }) => {
           <h1>{game.name}</h1>
           <p>Rating: {game.rating}</p>
           <p>Release date: {game.released}</p>
-          <a target='_blank' href={game.website || `https://rawg.io/games/${game.slug}`}>Website</a>
+          <a target='_blank' href={game.website || `https://rawg.io/games/${game.slug}`} rel="noreferrer">Website</a>
         </div>
       </div>
       <div className="description">
