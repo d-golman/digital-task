@@ -1,37 +1,30 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Games from '../components/Games';
 import Layout from '../components/Layout';
+import SortFields from '../components/SortFields';
 import { initializeStore } from '../store';
 import { fetchGames } from '../store/actions/gamesActions';
 import { fetchPlatforms } from '../store/actions/platformsActions';
 
 const Index = () => {
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchGames());
-  // }, [dispatch]);
-  const { games } = useSelector(state => state.games);
-  const { platforms } = useSelector(state => state.platforms);
+
   return (
     <Layout>
-      <select>{platforms.map(platform => (
-        <option value={platform.id} key={platform.id}>{platform.name}</option>
-      ))}</select>
-      <ul>{games.map(game => (
-        <li key={game.id}>{game.name}</li>
-      ))}</ul>
+      <SortFields />
+      <Games />
     </Layout>
   );
 };
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const reduxStore = initializeStore();
   const { dispatch } = reduxStore;
-  const platforms = () => reduxStore.getState().platforms.platforms.map(platform => platform.id);
 
   await dispatch(fetchPlatforms());
-  await dispatch(fetchGames('1', platforms(), 'name'));
+  await dispatch(fetchGames());
 
   return { props: { initialReduxState: reduxStore.getState() } };
 }

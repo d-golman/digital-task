@@ -1,12 +1,16 @@
 import { useMemo } from 'react';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { gameListReducer } from './reducers/gameListReducer';
+import { gameReducer } from './reducers/gameReducer';
 import { gamesReducer } from './reducers/gamesReducer';
 import { platformReducer } from './reducers/platformsReducer';
 
 const reducer = combineReducers({
   games: gamesReducer,
-  platforms: platformReducer
+  game: gameReducer,
+  platforms: platformReducer,
+  gameList: gameListReducer
 });
 
 let store;

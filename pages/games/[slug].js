@@ -1,17 +1,25 @@
 import React from 'react';
+import Game from '../../components/Game';
 import Layout from '../../components/Layout';
+import { initializeStore } from '../../store';
+import { fetchGame } from '../../store/actions/gameActions';
 
-const Game = ({ slug }) => {
+const GamePage = ({ initialReduxState }) => {
+  const { game, error } = initialReduxState.game;
   return (
-    <Layout title={slug}>
-      <h1>Game {slug}</h1>
+    <Layout>
+      <Game game={game} error={error} />
     </Layout>
   );
 };
 
-export default Game;
+export default GamePage;
 
 
 export const getServerSideProps = async ({ query }) => {
-  return { props: { slug: query.slug } };
+  const reduxStore = initializeStore();
+  const { dispatch } = reduxStore;
+  await dispatch(fetchGame(query.slug));
+
+  return { props: { initialReduxState: reduxStore.getState() } };
 };
